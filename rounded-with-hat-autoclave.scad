@@ -1,20 +1,19 @@
 /*
  ******************************************************************************************
  *                                                                                        *
- *                     The autoclave with cutted cone form inside                         *
+ *                     The autoclave with sphere inside and cone china-hat                *
  *                                                                                        *
  ******************************************************************************************
- * The cutted cone volume:                                                                *
- *   V (cut. cone) = 1/3 * pi * h(cone) * (r1^2 + r1 * r2 + r2^2)                         *
+ * The sphere volume:                                                                     *
+ *   V (sphere) = 4/3 * pi * r1^3                                                         *
  *                                                                                        *
- * Therefore the volume of two cutted cone plus the cylinder is:                          *
- *   V (full) = 2/3 * pi * h(cone) * (r1^2 + r1 * r2 + r2^2) + pi * H(cylinder) * r1^2    *
+ * Therefore the volume of two half-spheres plus the cylinder is:                         *
+ *   V (full) = 4/3 * pi * r1^3 + pi * H(cylinder) * r1^2                                 *
  *                                                                                        *
  * From WolframAlpha:                                                                     *
- *   V = 2/3* pi*5*(8^2 + 8*1.5 + 1.5^2) + pi*6*8^2 = 2025                                *
+ *   V = 4/3* pi*7.5^2 + pi*3*7.5^2 = 2297                                                *
  ******************************************************************************************
  */
-
 
 /*
  ******************************************************************************************
@@ -32,14 +31,14 @@ SHOW = true;
  */
 h_wall = 2;
 
-d1_insideCuttedCone = 16;
-d2_insideCuttedCone = 3;
-h_insideCuttedCone = 5;
+d_insideSphere = 15;
 
-h_insideCylinder = 6;
+h_insideCylinder = 3;
 
-d_outsideCylinder = d1_insideCuttedCone + h_wall*2;
-h_outsideCylinder = h_insideCuttedCone*2 + h_insideCylinder + h_wall*2;
+d_outsideCylinder = d_insideSphere + h_wall*2;
+h_outsideCylinder = d_insideSphere + h_insideCylinder + h_wall*2;
+
+h_hatCylinder = 5;
 
 
 /*
@@ -49,15 +48,21 @@ h_outsideCylinder = h_insideCuttedCone*2 + h_insideCylinder + h_wall*2;
  */
 module insideVolume()
 {
-	module insideCuttedCone()
+	module insideSphere()
 	{
-		translate([0, 0, h_insideCylinder/2]) cylinder(d1 = d1_insideCuttedCone, d2 = d2_insideCuttedCone, h = h_insideCuttedCone, $fn=360, center=false);
+		translate([0, 0, h_outsideCylinder/2 - d_insideSphere/2 - h_wall]) sphere(d = d_insideSphere, $fn=360, center=true);
 	}
 
-	insideCuttedCone();
-	mirror([0,0,1]) insideCuttedCone();
+	insideSphere();
+	mirror([0,0,1]) insideSphere();
 
-	cylinder(h = h_insideCylinder, d = d1_insideCuttedCone, $fn = 360, center=true);
+	translate([0,0,0]) cylinder(h = h_insideCylinder, d = d_insideSphere, $fn = 360, center=true);
+}
+
+
+module coneHat()
+{
+	cylinder(d1 = d_outsideCylinder, d2 = 0, h = h_hatCylinder, $fn = 360);
 }
 
 
@@ -73,13 +78,15 @@ module diffMain()
 		cylinder(d = d_outsideCylinder, h = h_outsideCylinder, $fn = 360, center=true);
 		insideVolume();
 	}
+	translate([0, 0, h_outsideCylinder/2]) coneHat();
 }
 
 
 module showMain()
 {
-		insideVolume();
-		#cylinder(d = d_outsideCylinder, h = h_outsideCylinder, $fn = 360, center=true);
+	insideVolume();
+	#cylinder(d = d_outsideCylinder, h = h_outsideCylinder, $fn = 360, center=true);
+	translate([0, 0, h_outsideCylinder/2]) coneHat();
 }
 
 

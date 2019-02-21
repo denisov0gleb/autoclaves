@@ -48,7 +48,7 @@ module insideVolume()
 {
 	module insideSphere()
 	{
-		translate([0, 0, h_outsideCylinder/2 - d_insideSphere/2 - h_wall]) sphere(d=d_insideSphere, $fn=360, center=true);
+		translate([0, 0, h_outsideCylinder/2 - d_insideSphere/2 - h_wall]) sphere(d = d_insideSphere, $fn=360, center=true);
 	}
 
 	insideSphere();
