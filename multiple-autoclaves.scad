@@ -33,8 +33,6 @@ SHOW = true;
 xAxisAutoclaves = 5; // amount x
 yAxisAutoclaves = 5; // amount y
 
-heightC=10; // h diff cylinder
-
 
 h_wall = 2; // wall thickness
 
@@ -46,10 +44,6 @@ d_outsideCylinder = d_insideSphere + h_wall*2;
 h_outsideCylinder = d_insideSphere + h_insideCylinder + h_wall*2;
 
 fn_insideSphere = 360;
-
-heightAll = d_insideSphere*2+heightC+h_wall*2;
-volume = (d_insideSphere+h_wall)*2;
-
 
 
 /*

@@ -21,7 +21,7 @@
  * Otherwise set SHOW to false to the final rendering.                                    *
  ******************************************************************************************
  */
-SHOW = false;
+SHOW = true;
 
 
 /*
@@ -46,7 +46,7 @@ fn_insideSphere = 360;
  *                               Modules                                                  *
  ******************************************************************************************
  */
-module insideVolume()
+module roundedInsideVolume()
 {
 	module insideSphere()
 	{
@@ -63,27 +63,10 @@ module insideVolume()
 
 /*
  ******************************************************************************************
- *                               Two Kind of Main                                         *
+ *                               Autoclave module                                         *
  ******************************************************************************************
  */
-module diffMain()
-{
-	difference()
-	{
-		cylinder(d = d_outsideCylinder, h = h_outsideCylinder, $fn = 360, center=true);
-		insideVolume();
-	}
-}
-
-
-module showMain()
-{
-	insideVolume();
-	#cylinder(d = d_outsideCylinder, h = h_outsideCylinder, $fn = 360, center=true);
-}
-
-
-module main()
+module roundedAutoclave()
 {
 	if (SHOW)
 	{
@@ -96,7 +79,29 @@ module main()
 
 /*
  ******************************************************************************************
+ *                               Two Kind of Main                                         *
+ ******************************************************************************************
+ */
+module diffMain()
+{
+	difference()
+	{
+		cylinder(d = d_outsideCylinder, h = h_outsideCylinder, $fn = 360, center=true);
+		roundedInsideVolume();
+	}
+}
+
+
+module showMain()
+{
+	roundedInsideVolume();
+	#cylinder(d = d_outsideCylinder, h = h_outsideCylinder, $fn = 360, center=true);
+}
+
+
+/*
+ ******************************************************************************************
  *                                     Main                                               *
  ******************************************************************************************
  */
-main();
+roundedAutoclave();
