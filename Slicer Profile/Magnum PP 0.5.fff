@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<profile name="Magnum PP 0.5" version="2019-02-21 16:26:04" app="S3D-Software 3.1.0">
+<profile name="Magnum PP 0.5" version="2019-02-22 15:54:27" app="S3D-Software 3.1.0">
   <baseProfile>Default</baseProfile>
   <printMaterial>ABS</printMaterial>
   <printQuality>Medium</printQuality>
@@ -13,7 +13,7 @@
     <useRetract>1</useRetract>
     <retractionDistance>1.2</retractionDistance>
     <extraRestartDistance>0</extraRestartDistance>
-    <retractionZLift>0</retractionZLift>
+    <retractionZLift>0.2</retractionZLift>
     <retractionSpeed>1800</retractionSpeed>
     <useCoasting>0</useCoasting>
     <coastingDistance>0.2</coastingDistance>
@@ -21,7 +21,7 @@
     <wipeDistance>1</wipeDistance>
   </extruder>
   <primaryExtruder>0</primaryExtruder>
-  <layerHeight>0.25</layerHeight>
+  <layerHeight>0.15</layerHeight>
   <topSolidLayers>4</topSolidLayers>
   <bottomSolidLayers>4</bottomSolidLayers>
   <perimeterOutlines>4</perimeterOutlines>
@@ -42,7 +42,7 @@
   <raftSeparationDistance>0</raftSeparationDistance>
   <raftInfill>80</raftInfill>
   <disableRaftBaseLayers>0</disableRaftBaseLayers>
-  <useSkirt>0</useSkirt>
+  <useSkirt>1</useSkirt>
   <skirtExtruder>0</skirtExtruder>
   <skirtLayers>1</skirtLayers>
   <skirtOutlines>7</skirtOutlines>
@@ -159,7 +159,7 @@
   <rapidXYspeed>4800</rapidXYspeed>
   <rapidZspeed>1000</rapidZspeed>
   <minBridgingArea>50</minBridgingArea>
-  <bridgingExtraInflation>2</bridgingExtraInflation>
+  <bridgingExtraInflation>1</bridgingExtraInflation>
   <bridgingExtrusionMultiplier>1</bridgingExtrusionMultiplier>
   <bridgingSpeedMultiplier>0.8</bridgingSpeedMultiplier>
   <filamentDiameter>1.75</filamentDiameter>
@@ -172,7 +172,7 @@
   <useDiaphragm>0</useDiaphragm>
   <diaphragmLayerInterval>20</diaphragmLayerInterval>
   <robustSlicing>1</robustSlicing>
-  <mergeAllIntoSolid>1</mergeAllIntoSolid>
+  <mergeAllIntoSolid>0</mergeAllIntoSolid>
   <onlyRetractWhenCrossingOutline>1</onlyRetractWhenCrossingOutline>
   <retractBetweenLayers>1</retractBetweenLayers>
   <useRetractionMinTravel>0</useRetractionMinTravel>
@@ -238,7 +238,7 @@
     <supportInfillPercentage>25</supportInfillPercentage>
   </autoConfigureQuality>
   <autoConfigureQuality name="Medium">
-    <layerHeight>0.25</layerHeight>
+    <layerHeight>0.15</layerHeight>
     <topSolidLayers>4</topSolidLayers>
     <bottomSolidLayers>4</bottomSolidLayers>
     <skirtLayers>1</skirtLayers>
