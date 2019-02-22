@@ -18,28 +18,19 @@
 
 /*
  ******************************************************************************************
+ *                               Variables                                                *
+ ******************************************************************************************
+ */
+include <variables.scad>
+
+
+/*
+ ******************************************************************************************
  * Set SHOW to true to look inside the cylinder.                                          *
  * Otherwise set SHOW to false to the final rendering.                                    *
  ******************************************************************************************
  */
 SHOW = true;
-
-
-/*
- ******************************************************************************************
- *                               Variables                                                *
- ******************************************************************************************
- */
-h_wall = 2;
-
-d1_insideCuttedCone = 16;
-d2_insideCuttedCone = 3;
-h_insideCuttedCone = 5;
-
-h_insideCylinder = 6;
-
-d_outsideCylinder = d1_insideCuttedCone + h_wall*2;
-h_outsideCylinder = h_insideCuttedCone*2 + h_insideCylinder + h_wall*2;
 
 
 /*
@@ -51,13 +42,14 @@ module insideVolume()
 {
 	module insideCuttedCone()
 	{
-		translate([0, 0, h_insideCylinder/2]) cylinder(d1 = d1_insideCuttedCone, d2 = d2_insideCuttedCone, h = h_insideCuttedCone, $fn=360, center=false);
+		translate([0, 0, h_insideCylinder_CONE/2]) cylinder(d1 = d1_insideCuttedCone, d2 =
+		d2_insideCuttedCone, h = h_insideCuttedCone, $fn=fn_insideCone, center=false);
 	}
 
 	insideCuttedCone();
 	mirror([0,0,1]) insideCuttedCone();
 
-	cylinder(h = h_insideCylinder, d = d1_insideCuttedCone, $fn = 360, center=true);
+	cylinder(h = h_insideCylinder_CONE, d = d1_insideCuttedCone, $fn=fn_insideCone, center=true);
 }
 
 
@@ -70,7 +62,7 @@ module diffMain()
 {
 	difference()
 	{
-		cylinder(d = d_outsideCylinder, h = h_outsideCylinder, $fn = 360, center=true);
+		cylinder(d = d_outsideCylinder_CONE, h = h_outsideCylinder_CONE, $fn=fn_insideCone, center=true);
 		insideVolume();
 	}
 }
@@ -79,7 +71,7 @@ module diffMain()
 module showMain()
 {
 		insideVolume();
-		#cylinder(d = d_outsideCylinder, h = h_outsideCylinder, $fn = 360, center=true);
+		#cylinder(d = d_outsideCylinder_CONE, h = h_outsideCylinder_CONE, $fn=fn_insideCone, center=true);
 }
 
 

@@ -12,8 +12,23 @@
  *                                                                                        *
  * From WolframAlpha:                                                                     *
  *   V = 4/3* pi*7.5^2 + pi*3*7.5^2 = 2297                                                *
+ *                                                                                        *
+ ******************************************************************************************
+ *                                                                                        *
+ * Based on round-autoclave.scad                                                          *
+ *                                                                                        *
  ******************************************************************************************
  */
+use <rounded-autoclave.scad>
+
+
+/*
+ ******************************************************************************************
+ *                               Variables                                                *
+ ******************************************************************************************
+ */
+include <variables.scad>
+
 
 /*
  ******************************************************************************************
@@ -26,23 +41,6 @@ SHOW = true;
 
 /*
  ******************************************************************************************
- *                               Variables                                                *
- ******************************************************************************************
- */
-h_wall = 2;
-
-d_insideSphere = 15;
-
-h_insideCylinder = 3;
-
-d_outsideCylinder = d_insideSphere + h_wall*2;
-h_outsideCylinder = d_insideSphere + h_insideCylinder + h_wall*2;
-
-h_hatCylinder = 5;
-
-
-/*
- ******************************************************************************************
  *                               Modules                                                  *
  ******************************************************************************************
  */
@@ -50,7 +48,7 @@ module insideVolume()
 {
 	module insideSphere()
 	{
-		translate([0, 0, h_outsideCylinder/2 - d_insideSphere/2 - h_wall]) sphere(d = d_insideSphere, $fn=360, center=true);
+		translate([0, 0, h_outsideCylinder_ROUND/2 - d_insideSphere/2 - h_wall]) sphere(d = d_insideSphere, $fn=360, center=true);
 	}
 
 	insideSphere();
@@ -62,35 +60,16 @@ module insideVolume()
 
 module coneHat()
 {
-	cylinder(d1 = d_outsideCylinder, d2 = 0, h = h_hatCylinder, $fn = 360);
+	cylinder(d1 = d_outsideCylinder_ROUND, d2 = 0, h = h_hatCylinder, $fn = 360);
 }
 
 
 /*
  ******************************************************************************************
- *                               Two Kind of Main                                         *
+ *                               Autoclave module                                         *
  ******************************************************************************************
  */
-module diffMain()
-{
-	difference()
-	{
-		cylinder(d = d_outsideCylinder, h = h_outsideCylinder, $fn = 360, center=true);
-		insideVolume();
-	}
-	translate([0, 0, h_outsideCylinder/2]) coneHat();
-}
-
-
-module showMain()
-{
-	insideVolume();
-	#cylinder(d = d_outsideCylinder, h = h_outsideCylinder, $fn = 360, center=true);
-	translate([0, 0, h_outsideCylinder/2]) coneHat();
-}
-
-
-module main()
+module withHatAutoclave()
 {
 	if (SHOW)
 	{
@@ -103,7 +82,31 @@ module main()
 
 /*
  ******************************************************************************************
+ *                               Two Kind of Main                                         *
+ ******************************************************************************************
+ */
+module diffMain()
+{
+	difference()
+	{
+		cylinder(d = d_outsideCylinder_ROUND, h = h_outsideCylinder_ROUND, $fn = 360, center=true);
+		roundedInsideVolume();
+	}
+	translate([0, 0, h_outsideCylinder_ROUND/2]) coneHat();
+}
+
+
+module showMain()
+{
+	roundedInsideVolume();
+	#cylinder(d = d_outsideCylinder_ROUND, h = h_outsideCylinder_ROUND, $fn = 360, center=true);
+	translate([0, 0, h_outsideCylinder_ROUND/2]) coneHat();
+}
+
+
+/*
+ ******************************************************************************************
  *                                     Main                                               *
  ******************************************************************************************
  */
-main();
+withHatAutoclave();

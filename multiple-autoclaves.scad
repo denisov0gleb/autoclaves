@@ -1,19 +1,27 @@
 /*
  ******************************************************************************************
  *                                                                                        *
- *                     The autoclave with sphere inside                                   *
+ *                          Multiple autoclave                                            *
  *                                                                                        *
  ******************************************************************************************
- * The sphere volume:                                                                     *
- *   V (sphere) = 4/3 * pi * r1^3                                                         *
  *                                                                                        *
- * Therefore the volume of two half-spheres plus the cylinder is:                         *
- *   V (full) = 4/3 * pi * r1^3 + pi * H(cylinder) * r1^2                                 *
+ * Usage:                                                                                 *
+ *   change xAxisAutoclaves and yAxisAutoclaves to needed amount of autoclaves in matrix  *
  *                                                                                        *
- * From WolframAlpha:                                                                     *
- *   V = 4/3* pi*7.5^2 + pi*3*7.5^2 = 2297                                                *
  ******************************************************************************************
  */
+
+
+/*
+ ******************************************************************************************
+ *                               Variables                                                *
+ ******************************************************************************************
+ */
+include <variables.scad>
+
+xAxisAutoclaves = 5; // amount x
+yAxisAutoclaves = 5; // amount y
+
 
 /*
  ******************************************************************************************
@@ -26,24 +34,25 @@ SHOW = true;
 
 /*
  ******************************************************************************************
- *                               Variables                                                *
+ *                       Different forms of autoclaves                                    *
+ ******************************************************************************************
+ *                                                                                        *
+ * Usage:                                                                                 *
+ *   use <your-name-of-autoclave.scad>                                                    *
+ *                                                                                        *
+ *   change the name of the autoclave inside form module in currentUseAutoclave module    *
+ *                                                                                        *
  ******************************************************************************************
  */
+use <rounded-autoclave.scad>
+use <cone-autoclave.scad>
+use <rounded-with-hat-autoclave.scad>
 
-xAxisAutoclaves = 5; // amount x
-yAxisAutoclaves = 5; // amount y
 
-
-h_wall = 2; // wall thickness
-
-d_insideSphere = 14.67;
-
-h_insideCylinder = 3;
-
-d_outsideCylinder = d_insideSphere + h_wall*2;
-h_outsideCylinder = d_insideSphere + h_insideCylinder + h_wall*2;
-
-fn_insideSphere = 360;
+module currentUseAutoclave()
+{
+ roundedInsideVolume();
+}
 
 
 /*
@@ -51,30 +60,17 @@ fn_insideSphere = 360;
  *                               Modules                                                  *
  ******************************************************************************************
  */
-module insideVolume()
-{
-	module insideSphere()
-	{
-		translate([0, 0, h_outsideCylinder/2 - d_insideSphere/2 - h_wall]) sphere(d = d_insideSphere, $fn=fn_insideSphere, center=true);
-	}
-
-	insideSphere();
-	mirror([0,0,1]) insideSphere();
-
-	cylinder(h = h_insideCylinder, d = d_insideSphere, $fn=fn_insideSphere, center=true);
-}
-
-
 module manyAutoclaves()
 {
 	for (i = [0 : xAxisAutoclaves - 1])
 	{
 		for (j = [0 : yAxisAutoclaves - 1])
 		{
-			translate([i * d_outsideCylinder, j * d_outsideCylinder, 0]) insideVolume();
+			translate([i * d_outsideCylinder, j * d_outsideCylinder, 0]) currentUseAutoclave();
 		}
 	}
 }
+
 
 module autoclavesCase()
 {
@@ -83,6 +79,22 @@ module autoclavesCase()
 	function z_cube() = h_outsideCylinder;
 
 	translate([-d_outsideCylinder/2, -d_outsideCylinder/2, -h_outsideCylinder/2]) cube([x_cube(), y_cube(), z_cube()], center=false);
+}
+
+
+/*
+ ******************************************************************************************
+ *                                   Autoclaves                                           *
+ ******************************************************************************************
+ */
+module autoclaves()
+{
+	if (SHOW)
+	{
+		showMain();
+	}
+	else
+		diffMain();
 }
 
 
@@ -108,20 +120,9 @@ module showMain()
 }
 
 
-module main()
-{
-	if (SHOW)
-	{
-		showMain();
-	}
-	else
-		diffMain();
-}
-
-
 /*
  ******************************************************************************************
  *                                     Main                                               *
  ******************************************************************************************
  */
-main();
+autoclaves();
