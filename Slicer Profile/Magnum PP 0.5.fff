@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<profile name="Magnum PP 0.5" version="2019-02-22 15:54:27" app="S3D-Software 3.1.0">
+<profile name="Magnum PP 0.5" version="2019-02-25 14:20:36" app="S3D-Software 3.1.0">
   <baseProfile>Default</baseProfile>
   <printMaterial>ABS</printMaterial>
   <printQuality>Medium</printQuality>
@@ -21,7 +21,7 @@
     <wipeDistance>1</wipeDistance>
   </extruder>
   <primaryExtruder>0</primaryExtruder>
-  <layerHeight>0.15</layerHeight>
+  <layerHeight>0.2</layerHeight>
   <topSolidLayers>4</topSolidLayers>
   <bottomSolidLayers>4</bottomSolidLayers>
   <perimeterOutlines>4</perimeterOutlines>
@@ -89,8 +89,7 @@
     <relayBetweenLayers>0</relayBetweenLayers>
     <relayBetweenLoops>0</relayBetweenLoops>
     <stabilizeAtStartup>1</stabilizeAtStartup>
-    <setpoint layer="1" temperature="230"/>
-    <setpoint layer="3" temperature="210"/>
+    <setpoint layer="1" temperature="240"/>
   </temperatureController>
   <temperatureController name="Bed">
     <temperatureNumber>0</temperatureNumber>
@@ -152,7 +151,7 @@
   <celebration>0</celebration>
   <celebrationSong>Random Song</celebrationSong>
   <postProcessing></postProcessing>
-  <defaultSpeed>1000</defaultSpeed>
+  <defaultSpeed>750</defaultSpeed>
   <outlineUnderspeed>0.5</outlineUnderspeed>
   <solidInfillUnderspeed>0.8</solidInfillUnderspeed>
   <supportUnderspeed>0.8</supportUnderspeed>
@@ -203,8 +202,7 @@
       <relayBetweenLayers>0</relayBetweenLayers>
       <relayBetweenLoops>0</relayBetweenLoops>
       <stabilizeAtStartup>1</stabilizeAtStartup>
-      <setpoint layer="1" temperature="230"/>
-      <setpoint layer="3" temperature="210"/>
+      <setpoint layer="1" temperature="240"/>
     </temperatureController>
     <globalBedTemperature>25</globalBedTemperature>
     <globalExtrusionMultiplier>1</globalExtrusionMultiplier>
@@ -238,7 +236,7 @@
     <supportInfillPercentage>25</supportInfillPercentage>
   </autoConfigureQuality>
   <autoConfigureQuality name="Medium">
-    <layerHeight>0.15</layerHeight>
+    <layerHeight>0.2</layerHeight>
     <topSolidLayers>4</topSolidLayers>
     <bottomSolidLayers>4</bottomSolidLayers>
     <skirtLayers>1</skirtLayers>
