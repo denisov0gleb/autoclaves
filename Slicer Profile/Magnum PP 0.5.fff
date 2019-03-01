@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<profile name="Magnum PP 0.5" version="2019-02-26 10:47:09" app="S3D-Software 3.1.0">
+<profile name="Magnum PP 0.5" version="2019-02-28 12:45:03" app="S3D-Software 3.1.0">
   <baseProfile>Default</baseProfile>
   <printMaterial>ABS</printMaterial>
   <printQuality>Medium</printQuality>
@@ -9,7 +9,7 @@
     <diameter>0.5</diameter>
     <autoWidth>1</autoWidth>
     <width>0.6</width>
-    <extrusionMultiplier>1</extrusionMultiplier>
+    <extrusionMultiplier>1.1</extrusionMultiplier>
     <useRetract>1</useRetract>
     <retractionDistance>1.2</retractionDistance>
     <extraRestartDistance>0</extraRestartDistance>
@@ -21,9 +21,9 @@
     <wipeDistance>1</wipeDistance>
   </extruder>
   <primaryExtruder>0</primaryExtruder>
-  <layerHeight>0.2</layerHeight>
-  <topSolidLayers>5</topSolidLayers>
-  <bottomSolidLayers>5</bottomSolidLayers>
+  <layerHeight>0.15</layerHeight>
+  <topSolidLayers>8</topSolidLayers>
+  <bottomSolidLayers>8</bottomSolidLayers>
   <perimeterOutlines>6</perimeterOutlines>
   <printPerimetersInsideOut>1</printPerimetersInsideOut>
   <startPointOption>1</startPointOption>
@@ -151,7 +151,7 @@
   <celebration>0</celebration>
   <celebrationSong>Random Song</celebrationSong>
   <postProcessing></postProcessing>
-  <defaultSpeed>750</defaultSpeed>
+  <defaultSpeed>700</defaultSpeed>
   <outlineUnderspeed>0.5</outlineUnderspeed>
   <solidInfillUnderspeed>0.8</solidInfillUnderspeed>
   <supportUnderspeed>0.8</supportUnderspeed>
@@ -205,7 +205,7 @@
       <setpoint layer="1" temperature="240"/>
     </temperatureController>
     <globalBedTemperature>25</globalBedTemperature>
-    <globalExtrusionMultiplier>1</globalExtrusionMultiplier>
+    <globalExtrusionMultiplier>1.1</globalExtrusionMultiplier>
     <fanSpeed>
       <setpoint layer="1" speed="0"/>
     </fanSpeed>
@@ -236,9 +236,9 @@
     <supportInfillPercentage>25</supportInfillPercentage>
   </autoConfigureQuality>
   <autoConfigureQuality name="Medium">
-    <layerHeight>0.2</layerHeight>
-    <topSolidLayers>5</topSolidLayers>
-    <bottomSolidLayers>5</bottomSolidLayers>
+    <layerHeight>0.15</layerHeight>
+    <topSolidLayers>8</topSolidLayers>
+    <bottomSolidLayers>8</bottomSolidLayers>
     <skirtLayers>1</skirtLayers>
     <infillPercentage>100</infillPercentage>
     <supportInfillPercentage>30</supportInfillPercentage>
