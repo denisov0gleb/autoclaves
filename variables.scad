@@ -70,3 +70,6 @@ yAxisAutoclaves = 3; // amount y
 d_outsideCylinder = d_insideSphere + h_wall*2;
 h_outsideCylinder = d_insideSphere + h_insideCylinder_ROUND + h_wall*2;
 
+r_roundCornerCase = 10;
+d_roundCornerCase = 2*r_roundCornerCase;
+fn_roundCornerCase = 360;

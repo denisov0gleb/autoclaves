@@ -21,7 +21,7 @@
  * Otherwise set SHOW to false to the final rendering.                                    *
  ******************************************************************************************
  */
-SHOW = true;
+SHOW = false;
 
 
 /*
@@ -65,11 +65,24 @@ module manyAutoclaves()
 
 module autoclavesCase()
 {
+
 	function x_cube() = xAxisAutoclaves * d_outsideCylinder;
 	function y_cube() = yAxisAutoclaves * d_outsideCylinder;
 	function z_cube() = h_outsideCylinder;
 
-	translate([-d_outsideCylinder/2, -d_outsideCylinder/2, -h_outsideCylinder/2]) cube([x_cube(), y_cube(), z_cube()], center=false);
+	module roundCorner(move=[0, 0, 0])
+	{
+		translate([move[0]-d_outsideCylinder/2, move[1]-d_outsideCylinder/2, move[2]]) cylinder(d =
+		d_roundCornerCase, h = h_outsideCylinder, $fn=fn_roundCornerCase, center=true);
+	}
+
+	hull()
+	{
+		roundCorner([r_roundCornerCase, r_roundCornerCase, 0]);
+		roundCorner([r_roundCornerCase, -r_roundCornerCase + y_cube(), 0]);
+		roundCorner([-r_roundCornerCase + x_cube(), -r_roundCornerCase + y_cube(), 0]);
+		roundCorner([-r_roundCornerCase + x_cube(), r_roundCornerCase, 0]);
+	}
 }
 
 
