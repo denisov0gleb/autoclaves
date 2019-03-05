@@ -31,7 +31,7 @@ h_insideCylinder_ROUND = 3;
 d_outsideCylinder_ROUND = d_insideSphere + xy_wall*2;
 h_outsideCylinder_ROUND = d_insideSphere + h_insideCylinder_ROUND + h_wall*2;
 
-fn_insideSphere = 360;
+fn_insideSphere = 100;
 
 
 /*
@@ -72,4 +72,4 @@ h_outsideCylinder = d_insideSphere + h_insideCylinder_ROUND + h_wall*2;
 
 r_roundCornerCase = 10;
 d_roundCornerCase = 2*r_roundCornerCase;
-fn_roundCornerCase = 360;
+fn_roundCornerCase = 100;
