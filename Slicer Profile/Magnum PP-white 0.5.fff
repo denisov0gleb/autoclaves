@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<profile name="Magnum PP-white 0.5" version="2019-03-01 10:57:37" app="S3D-Software 3.1.0">
+<profile name="Magnum PP-white 0.5" version="2019-03-05 11:29:46" app="S3D-Software 3.1.0">
   <baseProfile>Default</baseProfile>
   <printMaterial>ABS</printMaterial>
   <printQuality>Medium</printQuality>
@@ -151,7 +151,7 @@
   <celebration>0</celebration>
   <celebrationSong>Random Song</celebrationSong>
   <postProcessing></postProcessing>
-  <defaultSpeed>700</defaultSpeed>
+  <defaultSpeed>800</defaultSpeed>
   <outlineUnderspeed>0.5</outlineUnderspeed>
   <solidInfillUnderspeed>0.8</solidInfillUnderspeed>
   <supportUnderspeed>0.8</supportUnderspeed>
