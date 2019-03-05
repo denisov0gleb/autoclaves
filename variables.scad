@@ -57,3 +57,16 @@ fn_insideCone = 360;
  ******************************************************************************************
  */
 h_hatCylinder = 5;
+
+
+/*
+ ******************************************************************************************
+ *                               Multiple autoclaves                                      *
+ ******************************************************************************************
+ */
+xAxisAutoclaves = 3; // amount x
+yAxisAutoclaves = 3; // amount y
+
+d_outsideCylinder = d_insideSphere + h_wall*2;
+h_outsideCylinder = d_insideSphere + h_insideCylinder_ROUND + h_wall*2;
+
