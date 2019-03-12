@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<profile name="Magnum PP-white 0.5" version="2019-03-07 12:10:47" app="S3D-Software 3.1.0">
+<profile name="Magnum PP-white 0.5" version="2019-03-12 15:19:39" app="S3D-Software 3.1.0">
   <baseProfile>Default</baseProfile>
   <printMaterial>ABS</printMaterial>
   <printQuality>Medium</printQuality>
@@ -151,7 +151,7 @@
   <celebration>0</celebration>
   <celebrationSong>Random Song</celebrationSong>
   <postProcessing></postProcessing>
-  <defaultSpeed>1000</defaultSpeed>
+  <defaultSpeed>950</defaultSpeed>
   <outlineUnderspeed>0.5</outlineUnderspeed>
   <solidInfillUnderspeed>0.8</solidInfillUnderspeed>
   <supportUnderspeed>0.8</supportUnderspeed>
@@ -167,7 +167,7 @@
   <useMinPrintHeight>0</useMinPrintHeight>
   <minPrintHeight>105</minPrintHeight>
   <useMaxPrintHeight>0</useMaxPrintHeight>
-  <maxPrintHeight>16</maxPrintHeight>
+  <maxPrintHeight>22</maxPrintHeight>
   <useDiaphragm>0</useDiaphragm>
   <diaphragmLayerInterval>20</diaphragmLayerInterval>
   <robustSlicing>1</robustSlicing>
