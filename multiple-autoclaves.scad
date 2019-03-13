@@ -52,70 +52,44 @@ module insideVolume()
 }
 
 
+module roundedAutoclave()
+{
+	if (SHOW)
+	{
+		insideVolume();
+		#cylinder(d = d_outsideCylinder_ROUND, h = h_outsideCylinder_ROUND, $fn = 360, center=true);
+	}
+	else
+	{
+		difference()
+		{
+			cylinder(d = d_outsideCylinder_ROUND, h = h_outsideCylinder_ROUND, $fn = 360, center=true);
+			insideVolume();
+		}
+	}
+}
+
+
 module manyAutoclaves()
 {
 	for (i = [0 : xAxisAutoclaves - 1])
 	{
 		for (j = [0 : yAxisAutoclaves - 1])
 		{
-			translate([i * d_outsideCylinder, j * d_outsideCylinder, 0]) insideVolume();
+			translate([i * (d_insideSphere + h_wall), j * (d_insideSphere + h_wall), 0]) roundedAutoclave();
 		}
-	}
-}
-
-module autoclavesCase()
-{
-
-	function x_cube() = xAxisAutoclaves * d_outsideCylinder;
-	function y_cube() = yAxisAutoclaves * d_outsideCylinder;
-	function z_cube() = h_outsideCylinder;
-
-	module roundCorner(move=[0, 0, 0])
-	{
-		translate([move[0]-d_outsideCylinder/2, move[1]-d_outsideCylinder/2, move[2]]) cylinder(d =
-		d_roundCornerCase, h = h_outsideCylinder, $fn=fn_roundCornerCase, center=true);
-	}
-
-	hull()
-	{
-		roundCorner([r_roundCornerCase, r_roundCornerCase, 0]);
-		roundCorner([r_roundCornerCase, -r_roundCornerCase + y_cube(), 0]);
-		roundCorner([-r_roundCornerCase + x_cube(), -r_roundCornerCase + y_cube(), 0]);
-		roundCorner([-r_roundCornerCase + x_cube(), r_roundCornerCase, 0]);
 	}
 }
 
 
 /*
  ******************************************************************************************
- *                               Two Kind of Main                                         *
+ *                                     The Main                                           *
  ******************************************************************************************
  */
-module diffMain()
-{
-	difference()
-	{
-		autoclavesCase();
-		manyAutoclaves();
-	}
-}
-
-
-module showMain()
-{
-	manyAutoclaves();
-	#autoclavesCase();
-}
-
-
 module main()
 {
-	if (SHOW)
-	{
-		showMain();
-	}
-	else
-		diffMain();
+	manyAutoclaves();
 }
 
 
