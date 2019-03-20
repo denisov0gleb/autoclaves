@@ -17,6 +17,7 @@
  */
 xy_wall = 4;
 h_wall = 4;
+h_wallBottom = 6;
 
 
 /*
@@ -29,7 +30,7 @@ d_insideSphere = 15;
 h_insideCylinder_ROUND = 3;
 
 d_outsideCylinder_ROUND = d_insideSphere + xy_wall*2;
-h_outsideCylinder_ROUND = d_insideSphere + h_insideCylinder_ROUND + h_wall*2;
+h_outsideCylinder_ROUND = d_insideSphere + h_insideCylinder_ROUND + h_wall + h_wallBottom;
 
 fn_insideSphere = 100;
 

@@ -57,13 +57,13 @@ module roundedAutoclave()
 	if (SHOW)
 	{
 		insideVolume();
-		#cylinder(d = d_outsideCylinder_ROUND, h = h_outsideCylinder_ROUND, $fn = 360, center=true);
+		#translate([0, 0, -h_wallBottom + h_wall]) cylinder(d = d_outsideCylinder_ROUND, h = h_outsideCylinder_ROUND, $fn = 360, center=true);
 	}
 	else
 	{
 		difference()
 		{
-			cylinder(d = d_outsideCylinder_ROUND, h = h_outsideCylinder_ROUND, $fn = 360, center=true);
+			translate([0, 0, -h_wallBottom + h_wall]) cylinder(d = d_outsideCylinder_ROUND, h = h_outsideCylinder_ROUND, $fn = 360, center=true);
 			insideVolume();
 		}
 	}
