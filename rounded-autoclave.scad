@@ -78,7 +78,7 @@ module diffMain()
 {
 	difference()
 	{
-		cylinder(d = d_outsideCylinder_ROUND, h = h_outsideCylinder_ROUND, $fn = 360, center=true);
+		cylinder(d = d_outsideCylinder_ROUND, h = h_outsideCylinder_ROUND, $fn = fn_outsideCylinder, center=true);
 		roundedInsideVolume();
 	}
 }
@@ -87,7 +87,7 @@ module diffMain()
 module showMain()
 {
 	roundedInsideVolume();
-	#cylinder(d = d_outsideCylinder_ROUND, h = h_outsideCylinder_ROUND, $fn = 360, center=true);
+	#cylinder(d = d_outsideCylinder_ROUND, h = h_outsideCylinder_ROUND, $fn = fn_outsideCylinder, center=true);
 }
 
 
