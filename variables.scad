@@ -25,9 +25,9 @@ h_wallBottom = 6;
  *                               Rounded autoclave                                        *
  ******************************************************************************************
  */
-d_insideSphere = 15;
+d_insideSphere = 12;
 
-h_insideCylinder_ROUND = 3;
+h_insideCylinder_ROUND = 1;
 
 d_outsideCylinder_ROUND = d_insideSphere + xy_wall*2;
 h_outsideCylinder_ROUND = d_insideSphere + h_insideCylinder_ROUND + h_wall + h_wallBottom;
@@ -49,7 +49,7 @@ h_insideCylinder_CONE = 6;
 d_outsideCylinder_CONE = d1_insideCuttedCone + xy_wall*2;
 h_outsideCylinder_CONE = h_insideCuttedCone*2 + h_insideCylinder_CONE + h_wall*2;
 
-fn_insideCone = 360;
+fn_insideCone = 100;
 
 
 /*
@@ -65,8 +65,8 @@ h_hatCylinder = 5;
  *                               Multiple autoclaves                                      *
  ******************************************************************************************
  */
-xAxisAutoclaves = 2; // amount x
-yAxisAutoclaves = 2; // amount y
+xAxisAutoclaves = 3; // amount x
+yAxisAutoclaves = 3; // amount y
 
 d_outsideCylinder = d_insideSphere + h_wall*2;
 h_outsideCylinder = d_insideSphere + h_insideCylinder_ROUND + h_wall*2;
