@@ -25,9 +25,9 @@ h_wallBottom = 6;
  *                               Rounded autoclave                                        *
  ******************************************************************************************
  */
-d_insideSphere = 15;
+d_insideSphere = 12;
 
-h_insideCylinder_ROUND = 3;
+h_insideCylinder_ROUND = 1;
 
 d_outsideCylinder_ROUND = d_insideSphere + xy_wall*2;
 h_outsideCylinder_ROUND = d_insideSphere + h_insideCylinder_ROUND + h_wall + h_wallBottom;

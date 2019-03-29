@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<profile name="Magnum PP-white 0.5" version="2019-03-20 12:45:41" app="S3D-Software 3.1.0">
+<profile name="Magnum PP-white 0.5" version="2019-03-29 09:43:18" app="S3D-Software 3.1.0">
   <baseProfile>Default</baseProfile>
   <printMaterial>ABS</printMaterial>
   <printQuality>Medium</printQuality>
@@ -24,7 +24,7 @@
   <layerHeight>0.15</layerHeight>
   <topSolidLayers>8</topSolidLayers>
   <bottomSolidLayers>8</bottomSolidLayers>
-  <perimeterOutlines>6</perimeterOutlines>
+  <perimeterOutlines>8</perimeterOutlines>
   <printPerimetersInsideOut>1</printPerimetersInsideOut>
   <startPointOption>1</startPointOption>
   <startPointOriginX>0</startPointOriginX>
@@ -142,7 +142,7 @@
   <baudRateOverride>115200</baudRateOverride>
   <overridePrinterModels>0</overridePrinterModels>
   <printerModelsOverride></printerModelsOverride>
-  <startingGcode>G28 ; home all axes</startingGcode>
+  <startingGcode>G28 ; home all axes,</startingGcode>
   <layerChangeGcode></layerChangeGcode>
   <retractionGcode></retractionGcode>
   <toolChangeGcode></toolChangeGcode>
@@ -151,7 +151,7 @@
   <celebration>0</celebration>
   <celebrationSong>Random Song</celebrationSong>
   <postProcessing></postProcessing>
-  <defaultSpeed>950</defaultSpeed>
+  <defaultSpeed>900</defaultSpeed>
   <outlineUnderspeed>0.5</outlineUnderspeed>
   <solidInfillUnderspeed>0.8</solidInfillUnderspeed>
   <supportUnderspeed>0.8</supportUnderspeed>
