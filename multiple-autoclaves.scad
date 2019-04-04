@@ -42,13 +42,17 @@ module insideVolume()
 {
 	module insideSphere()
 	{
-		translate([0, 0, h_outsideCylinder/2 - d_insideSphere/2 - h_wall]) sphere(d = d_insideSphere, $fn=fn_insideSphere, center=true);
+		translate([0, 0, h_insideCylinder_ROUND/2]) sphere(d = d_insideSphere, $fn=fn_insideSphere, center=true);
 	}
 
-	insideSphere();
-	mirror([0,0,1]) insideSphere();
+	module full()
+	{
+		insideSphere();
+		mirror([0,0,1]) insideSphere();
+		cylinder(h = h_insideCylinder_ROUND, d = d_insideSphere, $fn=fn_insideSphere, center=true);
+	}
 
-	cylinder(h = h_insideCylinder_ROUND, d = d_insideSphere, $fn=fn_insideSphere, center=true);
+	translate([0, 0, (h_outsideCylinder_ROUND-h_insideVolume)/2 - h_wallUp]) full();
 }
 
 
@@ -57,13 +61,13 @@ module roundedAutoclave()
 	if (SHOW)
 	{
 		insideVolume();
-		#translate([0, 0, -h_wallBottom + h_wall]) cylinder(d = d_outsideCylinder_ROUND, h = h_outsideCylinder_ROUND, $fn = 360, center=true);
+		#cylinder(d = d_outsideCylinder_ROUND, h = h_outsideCylinder_ROUND, $fn = fn_outsideCylinder, center=true);
 	}
 	else
 	{
 		difference()
 		{
-			translate([0, 0, -h_wallBottom + h_wall]) cylinder(d = d_outsideCylinder_ROUND, h = h_outsideCylinder_ROUND, $fn = 360, center=true);
+			cylinder(d = d_outsideCylinder_ROUND, h = h_outsideCylinder_ROUND, $fn = fn_outsideCylinder, center=true);
 			insideVolume();
 		}
 	}
@@ -76,7 +80,7 @@ module manyAutoclaves()
 	{
 		for (j = [0 : yAxisAutoclaves - 1])
 		{
-			translate([i * (d_insideSphere + h_wall), j * (d_insideSphere + h_wall), 0]) roundedAutoclave();
+			translate([i * (d_insideSphere + xy_wall), j * (d_insideSphere + xy_wall), 0]) roundedAutoclave();
 		}
 	}
 }
