@@ -74,6 +74,24 @@ module roundedAutoclave()
 }
 
 
+module smoothWall()
+{
+	c = 2;
+	r1 = 10;
+	difference()
+	{
+		hull()
+		{
+			translate([0, 5, 0]) rotate([0,0,45]) cube([c, c, h_outsideCylinder_ROUND],center=true);
+			translate([0, -5, 0]) cylinder(d = 10, h = h_outsideCylinder_ROUND, $fn=fn_outsideCylinder, center=true);
+		}
+
+		translate([0, -5, 0]) cylinder(d = 10.6, h =
+		h_outsideCylinder_ROUND+1, $fn=fn_outsideCylinder, center=true);
+	}
+}
+
+
 module manyAutoclaves()
 {
 	for (i = [0 : xAxisAutoclaves - 1])
@@ -93,6 +111,14 @@ module manyAutoclaves()
  */
 module main()
 {
+	translate([d_insideSphere/2 + xy_wall/2, -d_insideSphere/2 - xy_wall/2 - 0.3, 0]) smoothWall();
+
+	translate([ -d_insideSphere/2 - xy_wall/2 - 0.3, d_insideSphere/2 + xy_wall/2, 0]) rotate([0, 0, -90]) smoothWall();
+
+	translate([ d_insideSphere*1.5 + xy_wall*1.5 + 0.3, d_insideSphere/2 + xy_wall/2, 0]) rotate([0, 0, 90]) smoothWall();
+
+	translate([d_insideSphere/2 + xy_wall/2, d_insideSphere*1.5 + xy_wall*1.5 + 0.3, 0]) rotate([0, 0, 180]) smoothWall();
+
 	manyAutoclaves();
 }
 
