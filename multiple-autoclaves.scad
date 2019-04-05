@@ -78,7 +78,7 @@ module smoothWall(dis1, dis2)
 {
 	function smoothR(dis1, dis2, Ro) = (Ro + Ro*dis1 / dis2)/(dis1 / dis2*dis1 / dis2 - 1);
 
-	Rs = smoothR(d_insideSphere + xy_wall, dis2, d_outsideCylinder_ROUND/2);
+	Rs = smoothR(d_insideSphere + xy_distance, dis2, d_outsideCylinder_ROUND/2);
 	Rf = d_outsideCylinder_ROUND/2 + Rs;
 	H1 = sqrt(Rf*Rf - dis1*dis1/4);
 	yPos = H1 * (dis1 - dis2) / dis1;
@@ -87,7 +87,11 @@ module smoothWall(dis1, dis2)
 	{
 		difference()
 		{
-			rotate([0, 0, 45]) cube([dis2/sqrt(2), dis2/sqrt(2), h_outsideCylinder_ROUND], center=true);
+			union()
+			{
+				rotate([0, 0, 45]) cube([dis2/sqrt(2), dis2/sqrt(2), h_outsideCylinder_ROUND], center=true);
+				translate([0, yPos/2, 0]) cube([dis2, yPos, h_outsideCylinder_ROUND], center=true);
+			}
 			translate([0, -dis2/2, 0]) cylinder(r = dis2/sqrt(2), h = h_outsideCylinder_ROUND + 4, $fn=fn_outsideCylinder, center=true);
 		}
 	}
@@ -112,7 +116,7 @@ module manyAutoclaves()
 	{
 		for (j = [0 : yAxisAutoclaves - 1])
 		{
-			translate([i * (d_insideSphere + xy_wall), j * (d_insideSphere + xy_wall), 0]) roundedAutoclave();
+			translate([i * (d_insideSphere + xy_distance), j * (d_insideSphere + xy_distance), 0]) roundedAutoclave();
 		}
 	}
 }
@@ -126,7 +130,7 @@ module manyAutoclaves()
 module main()
 {
 	manyAutoclaves();
-	smoothWall(d_insideSphere + xy_wall, d_smooth);
+	smoothWall(d_insideSphere + xy_distance, d_smooth);
 }
 
 
