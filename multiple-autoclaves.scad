@@ -74,20 +74,34 @@ module roundedAutoclave()
 }
 
 
-module smoothWall()
+module smoothWall(dis1, dis2)
 {
-	c = 2;
-	r1 = 10;
-	difference()
-	{
-		hull()
-		{
-			translate([0, 5, 0]) rotate([0,0,45]) cube([c, c, h_outsideCylinder_ROUND],center=true);
-			translate([0, -5, 0]) cylinder(d = 10, h = h_outsideCylinder_ROUND, $fn=fn_outsideCylinder, center=true);
-		}
+	function smoothR(dis1, dis2, Ro) = (Ro + Ro*dis1 / dis2)/(dis1 / dis2*dis1 / dis2 - 1);
 
-		translate([0, -5, 0]) cylinder(d = 10.6, h =
-		h_outsideCylinder_ROUND+1, $fn=fn_outsideCylinder, center=true);
+	Rs = smoothR(d_insideSphere + xy_wall, dis2, d_outsideCylinder_ROUND/2);
+	Rf = d_outsideCylinder_ROUND/2 + Rs;
+	H1 = sqrt(Rf*Rf - dis1*dis1/4);
+	yPos = H1 * (dis1 - dis2) / dis1;
+
+	module smooth()
+	{
+		difference()
+		{
+			rotate([0, 0, 45]) cube([dis2/sqrt(2), dis2/sqrt(2), h_outsideCylinder_ROUND], center=true);
+			translate([0, -dis2/2, 0]) cylinder(r = dis2/sqrt(2), h = h_outsideCylinder_ROUND + 4, $fn=fn_outsideCylinder, center=true);
+		}
+	}
+
+	for (i = [0 : xAxisAutoclaves - 2])
+	{
+		translate([dis1/2 + i*dis1, -yPos, 0]) smooth();
+		translate([dis1/2 + i*dis1, dis1*(yAxisAutoclaves - 1) + yPos, 0]) rotate([0, 0, 180]) smooth();
+	}
+
+	for (j = [0 : yAxisAutoclaves - 2])
+	{
+		translate([-yPos, dis1/2 + dis1*j, 0]) rotate([0, 0, -90]) smooth([0, 0, 0]);
+		translate([dis1*(xAxisAutoclaves - 1) + yPos, dis1/2 + dis1*j, 0]) rotate([0, 0, 90]) smooth([0, 0, 0]);
 	}
 }
 
@@ -111,15 +125,8 @@ module manyAutoclaves()
  */
 module main()
 {
-	translate([d_insideSphere/2 + xy_wall/2, -d_insideSphere/2 - xy_wall/2 - 0.3, 0]) smoothWall();
-
-	translate([ -d_insideSphere/2 - xy_wall/2 - 0.3, d_insideSphere/2 + xy_wall/2, 0]) rotate([0, 0, -90]) smoothWall();
-
-	translate([ d_insideSphere*1.5 + xy_wall*1.5 + 0.3, d_insideSphere/2 + xy_wall/2, 0]) rotate([0, 0, 90]) smoothWall();
-
-	translate([d_insideSphere/2 + xy_wall/2, d_insideSphere*1.5 + xy_wall*1.5 + 0.3, 0]) rotate([0, 0, 180]) smoothWall();
-
 	manyAutoclaves();
+	smoothWall(d_insideSphere + xy_wall, d_smooth);
 }
 
 

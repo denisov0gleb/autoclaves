@@ -36,7 +36,7 @@ h_insideVolume = d_insideSphere + h_insideCylinder_ROUND;
 
 fn_insideSphere = 100;
 
-fn_outsideCylinder = 100;
+fn_outsideCylinder = 200;
 
 
 /*
@@ -46,3 +46,5 @@ fn_outsideCylinder = 100;
  */
 xAxisAutoclaves = 2; // amount x
 yAxisAutoclaves = 2; // amount y
+
+d_smooth = 6;
