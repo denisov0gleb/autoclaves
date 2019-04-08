@@ -42,8 +42,7 @@ module roundedInsideVolume()
 {
 	module insideSphere()
 	{
-		translate([0, 0, h_outsideCylinder_ROUND/2 - d_insideSphere/2 - h_wall]) sphere(d = d_insideSphere,
-		$fn=fn_insideSphere, center=true);
+		translate([0, 0, h_insideCylinder_ROUND/2]) sphere(d = d_insideSphere, $fn=fn_insideSphere, center=true);
 	}
 
 	insideSphere();
@@ -79,14 +78,14 @@ module diffMain()
 	difference()
 	{
 		cylinder(d = d_outsideCylinder_ROUND, h = h_outsideCylinder_ROUND, $fn = fn_outsideCylinder, center=true);
-		roundedInsideVolume();
+		translate([0, 0, h_outsideCylinder_ROUND/2 - d_insideSphere/2 - h_insideCylinder_ROUND/2 - h_Up]) roundedInsideVolume();
 	}
 }
 
 
 module showMain()
 {
-	roundedInsideVolume();
+	translate([0, 0, h_outsideCylinder_ROUND/2 - d_insideSphere/2 - h_insideCylinder_ROUND/2 - h_Up]) roundedInsideVolume();
 	#cylinder(d = d_outsideCylinder_ROUND, h = h_outsideCylinder_ROUND, $fn = fn_outsideCylinder, center=true);
 }
 
