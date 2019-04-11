@@ -17,7 +17,7 @@
  */
 xy_wall = 6;
 h_wallUp = 6;
-h_wallBottom = 6;
+h_wallBottom = 8;
 
 xy_distance = 6;
 
