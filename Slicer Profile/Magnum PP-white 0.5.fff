@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<profile name="Magnum PP-white 0.5" version="2019-04-11 16:32:05" app="S3D-Software 3.1.0">
+<profile name="Magnum PP-white 0.5" version="2019-04-24 10:48:12" app="S3D-Software 3.1.0">
   <baseProfile>Default</baseProfile>
   <printMaterial>ABS</printMaterial>
   <printQuality>Medium</printQuality>
@@ -9,7 +9,7 @@
     <diameter>0.5</diameter>
     <autoWidth>1</autoWidth>
     <width>0.6</width>
-    <extrusionMultiplier>1.2</extrusionMultiplier>
+    <extrusionMultiplier>1.22</extrusionMultiplier>
     <useRetract>1</useRetract>
     <retractionDistance>1.2</retractionDistance>
     <extraRestartDistance>0</extraRestartDistance>
@@ -151,7 +151,7 @@
   <celebration>0</celebration>
   <celebrationSong>Random Song</celebrationSong>
   <postProcessing></postProcessing>
-  <defaultSpeed>1000</defaultSpeed>
+  <defaultSpeed>900</defaultSpeed>
   <outlineUnderspeed>0.5</outlineUnderspeed>
   <solidInfillUnderspeed>0.8</solidInfillUnderspeed>
   <supportUnderspeed>0.8</supportUnderspeed>
@@ -205,7 +205,7 @@
       <setpoint layer="1" temperature="248"/>
     </temperatureController>
     <globalBedTemperature>25</globalBedTemperature>
-    <globalExtrusionMultiplier>1.2</globalExtrusionMultiplier>
+    <globalExtrusionMultiplier>1.22</globalExtrusionMultiplier>
     <fanSpeed>
       <setpoint layer="1" speed="0"/>
     </fanSpeed>

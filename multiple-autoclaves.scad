@@ -7,11 +7,8 @@
  * The sphere volume:                                                                     *
  *   V (sphere) = 4/3 * pi * r1^3                                                         *
  *                                                                                        *
- * Therefore the volume of two half-spheres plus the cylinder is:                         *
- *   V (full) = 4/3 * pi * r1^3 + pi * H(cylinder) * r1^2                                 *
- *                                                                                        *
  * From WolframAlpha:                                                                     *
- *   V = 4/3* pi*6^3 + pi*1*5^2 = 1017                                                    *
+ *   V = 4/3* pi * 4.93^3 = 502 mcL                                                         *
  ******************************************************************************************
  */
 
