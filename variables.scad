@@ -47,6 +47,6 @@ fn_outsideCylinder = 200;
  ******************************************************************************************
  */
 xAxisAutoclaves = 2; // amount x
-yAxisAutoclaves = 2; // amount y
+yAxisAutoclaves = 1; // amount y
 
 d_smooth = 4;

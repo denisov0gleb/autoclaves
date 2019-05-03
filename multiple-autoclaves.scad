@@ -93,16 +93,22 @@ module smoothWall(dis1, dis2)
 		}
 	}
 
-	for (i = [0 : xAxisAutoclaves - 2])
+	if (xAxisAutoclaves >= 2)
 	{
-		translate([dis1/2 + i*dis1, -yPos, 0]) smooth();
-		translate([dis1/2 + i*dis1, dis1*(yAxisAutoclaves - 1) + yPos, 0]) rotate([0, 0, 180]) smooth();
+		for (i = [0 : xAxisAutoclaves - 2])
+		{
+			translate([dis1/2 + i*dis1, -yPos, 0]) smooth();
+			translate([dis1/2 + i*dis1, dis1*(yAxisAutoclaves - 1) + yPos, 0]) rotate([0, 0, 180]) smooth();
+		}
 	}
 
-	for (j = [0 : yAxisAutoclaves - 2])
+	if (yAxisAutoclaves >= 2)
 	{
-		translate([-yPos, dis1/2 + dis1*j, 0]) rotate([0, 0, -90]) smooth([0, 0, 0]);
-		translate([dis1*(xAxisAutoclaves - 1) + yPos, dis1/2 + dis1*j, 0]) rotate([0, 0, 90]) smooth([0, 0, 0]);
+		for (j = [0 : yAxisAutoclaves - 2])
+		{
+			translate([-yPos, dis1/2 + dis1*j, 0]) rotate([0, 0, -90]) smooth([0, 0, 0]);
+			translate([dis1*(xAxisAutoclaves - 1) + yPos, dis1/2 + dis1*j, 0]) rotate([0, 0, 90]) smooth([0, 0, 0]);
+		}
 	}
 }
 
