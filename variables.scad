@@ -15,9 +15,9 @@
  *                               Universal variables                                      *
  ******************************************************************************************
  */
-xy_wall = 6;
-h_wallUp = 6;
-h_wallBottom = 8;
+xy_wall = 5;
+h_wallUp = 5;
+h_wallBottom = 6;
 
 xy_distance = 6;
 
@@ -27,7 +27,7 @@ xy_distance = 6;
  *                               Rounded autoclave                                        *
  ******************************************************************************************
  */
-d_insideSphere = 4.93*2;
+d_insideSphere = 3.91*2;
 
 h_insideCylinder_ROUND = 0;
 
