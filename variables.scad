@@ -15,10 +15,10 @@
  *                               Universal variables                                      *
  ******************************************************************************************
  */
-xy_wall = 6;
-h_wall = 6;
-h_Bottom = 8;
-h_Up = 6;
+xy_wall = 5;
+h_wall = 5;
+h_Bottom = 6;
+h_Up = 5;
 
 
 /*
@@ -26,9 +26,9 @@ h_Up = 6;
  *                               Rounded autoclave                                        *
  ******************************************************************************************
  */
-d_insideSphere = 15;
+d_insideSphere = 3.91*2;
 
-h_insideCylinder_ROUND = 3;
+h_insideCylinder_ROUND = 0;
 
 d_outsideCylinder_ROUND = d_insideSphere + xy_wall*2;
 h_outsideCylinder_ROUND = d_insideSphere + h_insideCylinder_ROUND + h_Up + h_Bottom;
