@@ -19,7 +19,7 @@ xy_wall = 5;
 h_wallUp = 5;
 h_wallBottom = 6;
 
-xy_distance = 6;
+xy_distance = 7;
 
 
 /*
@@ -47,6 +47,6 @@ fn_outsideCylinder = 200;
  ******************************************************************************************
  */
 xAxisAutoclaves = 2; // amount x
-yAxisAutoclaves = 1; // amount y
+yAxisAutoclaves = 2; // amount y
 
 d_smooth = 4;
