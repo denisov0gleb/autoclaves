@@ -11,7 +11,7 @@
  *   V (full) = 4/3 * pi * r1^3 + pi * H(cylinder) * r1^2                                 *
  *                                                                                        *
  * From WolframAlpha:                                                                     *
- *   V = 4/3* pi*7.5^2 + pi*3*7.5^2 = 2297                                                *
+ *   V = 4/3* pi*(8.74/2)^3 + pi*3*7.5^2 = 349.57                                                *
  ******************************************************************************************
  */
 
@@ -57,14 +57,14 @@ module roundedInsideVolume()
  *                               Autoclave module                                         *
  ******************************************************************************************
  */
-module roundedAutoclave()
+module roundedAutoclave(h_up_var)
 {
 	if (SHOW)
 	{
-		showMain();
+		showMain(h_up_var);
 	}
 	else
-		diffMain();
+		diffMain(h_up_var);
 }
 
 
@@ -73,20 +73,23 @@ module roundedAutoclave()
  *                               Two Kind of Main                                         *
  ******************************************************************************************
  */
-module diffMain()
+module diffMain(h_up_var)
 {
+    height = d_insideSphere + h_up_var + h_Bottom;
 	difference()
 	{
-		cylinder(d = d_outsideCylinder_ROUND, h = h_outsideCylinder_ROUND, $fn = fn_outsideCylinder, center=true);
-		translate([0, 0, h_outsideCylinder_ROUND/2 - d_insideSphere/2 - h_insideCylinder_ROUND/2 - h_Up]) roundedInsideVolume();
-	}
+		translate([0, 0, height/2-h_Bottom-d_insideSphere/2])cylinder(d =               d_outsideCylinder_ROUND, h = height, $fn = fn_outsideCylinder, center=true);
+        roundedInsideVolume();
+    }
 }
 
 
-module showMain()
+
+module showMain(h_up_var)
 {
-	translate([0, 0, h_outsideCylinder_ROUND/2 - d_insideSphere/2 - h_insideCylinder_ROUND/2 - h_Up]) roundedInsideVolume();
-	#cylinder(d = d_outsideCylinder_ROUND, h = h_outsideCylinder_ROUND, $fn = fn_outsideCylinder, center=true);
+    height = d_insideSphere + h_up_var + h_Bottom;
+roundedInsideVolume();
+	#translate([0, 0, height/2-h_Bottom-d_insideSphere/2])cylinder(d = d_outsideCylinder_ROUND, h = height, $fn = fn_outsideCylinder, center=true);
 }
 
 
@@ -95,4 +98,8 @@ module showMain()
  *                                     Main                                               *
  ******************************************************************************************
  */
-roundedAutoclave();
+for (i=[0.5:0.5:2])
+{  
+    translate([(d_outsideCylinder_ROUND+25)*i,0,0]) roundedAutoclave(i);
+}
+
