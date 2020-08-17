@@ -13,6 +13,7 @@
  ******************************************************************************************
  */
 SHOW = false;
+TEST = false;
 
 use <threads.scad>
 
@@ -54,6 +55,15 @@ h_outside = r_cavitySphere*2 + roofOutside;
 
 separate = 1;
 
+h_stopper = 2;
+
+/*
+ * Fractions of sphere:
+ */
+fr1 = 4;
+fr2 = 5;
+
+
 /*
  ******************************************************************************************
  *                               Modules                                                  *
@@ -68,11 +78,60 @@ module Cavity()
 
 module AutoclaveInside()
 {
+
+	module column()
+	{
+		translate([6, 0, 0]) 
+			cylinder(d = 7, h = 10, $fn=FN_ALL, center=true);
+	}
+
+	module pillar()
+	{
+		hull()
+		{
+			translate([0, 0, -groundInside - r_cavitySphere - h_stopper - 10]) 
+				column();
+			mirror([1,0,0]) translate([0, 0, -groundInside - r_cavitySphere - h_stopper - 10]) 
+				column();
+			mirror([1,1,0]) translate([0, 0, -groundInside - r_cavitySphere - h_stopper - 10]) 
+				column();
+			mirror([1,-1,0]) translate([0, 0, -groundInside - r_cavitySphere - h_stopper - 10]) 
+				column();
+		}
+	}
+	
+		
 	module inside()
 	{
-		translate([0, 0, -r_cavitySphere/4 - groundInside/2 - h_inside/2]) 
-			metric_thread (diameter=d_inside+1.75, pitch=5, length=h_inside, thread_size=2.5, angle=45, leadin=2,internal=false);
-			/* cylinder(d = d_inside, h = h_inside, $fn=FN_ALL, center=true); */
+
+		if (TEST)
+		{
+			color("blue")
+				translate([0, 0, -r_cavitySphere*(fr2-fr1)/fr2]) 
+				cylinder(d = d_inside, h = r_cavitySphere*2*fr1/fr2, $fn=FN_ALL, center=true);
+		}
+		else
+		{
+			translate([0, 0, -r_cavitySphere*(fr2-fr1)/fr2 - r_cavitySphere*fr1/fr2]) 
+				metric_thread (diameter=d_inside+1.75, pitch=5, length=r_cavitySphere*2*fr1/fr2, thread_size=2.5, angle=45, leadin=2,internal=false);
+		}
+
+		color("black")
+		translate([0, 0, -groundInside/2 - r_cavitySphere]) 
+			cylinder(d = d_inside, h = groundInside, $fn=FN_ALL, center=true);
+			
+		color("green")
+		translate([0, 0, -groundInside - r_cavitySphere - h_stopper/2]) 
+			cylinder(d = d_inside + 7, h = h_stopper, $fn=FN_ALL, center=true);
+
+
+		hull()
+		{
+		translate([0, 0, -groundInside - r_cavitySphere - h_stopper/2]) 
+			cylinder(d = d_inside + 7, h = h_stopper, $fn=FN_ALL, center=true);
+		translate([0, 0, -20]) color("red") scale([1, 1, 0.1]) pillar();
+		}
+		pillar();
 	}
 
 	
@@ -88,8 +147,6 @@ module AutoclaveInside()
 	}
 	
 	inside();
-	insideRing();
-
 }
 
 
@@ -101,16 +158,6 @@ module AutoclaveOutside()
 			cylinder(d = d_inside+separate, h = h_inside, $fn=FN_ALL, center=true);
 	}
 
-	module insideRingCut()
-	{
-		translate([0, 0, h_insideRing/2 + r_cavitySphere/2+separate/2-0.01])
-			difference()
-			{
-				cylinder(d = d_inside+separate, h = h_insideRing+separate, $fn=FN_ALL, center=true);
-				cylinder(d = d_insideRing-separate, h = h_insideRing+1+separate, $fn=FN_ALL, center=true);
-			}
-	}
-
 
 	module outside()
 	{
@@ -119,12 +166,24 @@ module AutoclaveOutside()
 			translate([0, 0, h_outside/2 - r_cavitySphere]) 
 				cylinder(d = d_outside, h = h_outside, $fn=FN_ALL, center=true);
 
-			translate([0, 0, -r_cavitySphere/4 - groundInside/2 - h_inside/2]) 
-				metric_thread (diameter=d_inside+1.80, pitch=5, length=h_inside, thread_size=2.5, angle=45,
-				leadin=2,internal=true);
-			/* insideCut(); */
-			insideRingCut();
+			if(TEST)
+			{
+
+			color("blue")
+				translate([0, 0, -r_cavitySphere*(fr2-fr1)/fr2]) 
+				cylinder(d = d_inside, h = r_cavitySphere*2*fr1/fr2, $fn=FN_ALL, center=true);
+					/* insideCut(); */
+			}
+			else
+			{
+				translate([0, 0, -r_cavitySphere*(fr2-fr1)/fr2 - r_cavitySphere*fr1/fr2]) 
+					metric_thread (diameter=d_inside+1.85, pitch=5, length=r_cavitySphere*2*fr1/fr2 + 0.5, thread_size=2.5, angle=45, leadin=2,internal=true);
+			}
 		}
+
+		c = 5;
+		translate([0, 0, -r_cavitySphere + h_outside - c/2]) cube([d_outside + 20, c, c], center=true);
+		translate([0, 0, -r_cavitySphere + h_outside - c/2]) cube([c, d_outside + 20, c], center=true);
 	}
 	
 	outside();
@@ -141,8 +200,8 @@ module main()
 	if (SHOW)
 	{
 		Cavity();
-		#AutoclaveOutside();
-		#AutoclaveInside();
+		AutoclaveOutside();
+		/* #AutoclaveInside(); */
 	}
 	else
 	{
@@ -150,7 +209,7 @@ module main()
 		{
 			union()
 			{
-				/* color("red") AutoclaveInside(); */
+				/* AutoclaveInside(); */
 				AutoclaveOutside();
 			}
 			Cavity();
