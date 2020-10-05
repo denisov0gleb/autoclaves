@@ -63,6 +63,7 @@ h_stopper = 2;
 fr1 = 4;
 fr2 = 5;
 
+z_pillarPos = -4;
 
 /*
  ******************************************************************************************
@@ -89,14 +90,10 @@ module AutoclaveInside()
 	{
 		hull()
 		{
-			translate([0, 0, -groundInside - r_cavitySphere - h_stopper - 10]) 
-				column();
-			mirror([1,0,0]) translate([0, 0, -groundInside - r_cavitySphere - h_stopper - 10]) 
-				column();
-			mirror([1,1,0]) translate([0, 0, -groundInside - r_cavitySphere - h_stopper - 10]) 
-				column();
-			mirror([1,-1,0]) translate([0, 0, -groundInside - r_cavitySphere - h_stopper - 10]) 
-				column();
+			column();
+			mirror([1,0,0]) column();
+			mirror([1,1,0]) column();
+			mirror([1,-1,0]) column();
 		}
 	}
 	
@@ -116,22 +113,14 @@ module AutoclaveInside()
 				metric_thread (diameter=d_inside+1.75, pitch=5, length=r_cavitySphere*2*fr1/fr2, thread_size=2.5, angle=45, leadin=2,internal=false);
 		}
 
-		color("black")
-		translate([0, 0, -groundInside/2 - r_cavitySphere]) 
-			cylinder(d = d_inside, h = groundInside, $fn=FN_ALL, center=true);
-			
-		color("green")
-		translate([0, 0, -groundInside - r_cavitySphere - h_stopper/2]) 
-			cylinder(d = d_inside + 7, h = h_stopper, $fn=FN_ALL, center=true);
-
 
 		hull()
 		{
-		translate([0, 0, -groundInside - r_cavitySphere - h_stopper/2]) 
+		translate([0, 0, -r_cavitySphere - h_stopper/2]) 
 			cylinder(d = d_inside + 7, h = h_stopper, $fn=FN_ALL, center=true);
-		translate([0, 0, -20]) color("red") scale([1, 1, 0.1]) pillar();
+		translate([0, 0, -r_cavitySphere - h_stopper + z_pillarPos]) color("red") scale([1, 1, 0.1]) pillar();
 		}
-		pillar();
+		translate([0, 0, -groundInside - r_cavitySphere - h_stopper + z_pillarPos + 1]) pillar();
 	}
 
 	
@@ -200,8 +189,8 @@ module main()
 	if (SHOW)
 	{
 		Cavity();
-		AutoclaveOutside();
-		/* #AutoclaveInside(); */
+		/* AutoclaveOutside(); */
+		#AutoclaveInside();
 	}
 	else
 	{
@@ -209,8 +198,8 @@ module main()
 		{
 			union()
 			{
-				/* AutoclaveInside(); */
-				AutoclaveOutside();
+				AutoclaveInside();
+				/* AutoclaveOutside(); */
 			}
 			Cavity();
 		}
@@ -224,5 +213,3 @@ module main()
  ******************************************************************************************
  */
 main();
-
-
