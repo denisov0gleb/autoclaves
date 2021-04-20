@@ -74,6 +74,7 @@ module autoclave(volume, d, bottom, top, wall)
 /*
  * Usage:
  * autoclave_3x3(volume=1000, bottom=5, top=5, wall=5, delta=2);
+ * autoclave_3x3(volume=1000, bottom=5, top=5, wall=5, delta=2);
  *   or
  * autoclave_3x3(volume=1000, bottom=5, top=5, wall=5);
  */
