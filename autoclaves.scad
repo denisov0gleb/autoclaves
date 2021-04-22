@@ -1,8 +1,22 @@
 // Set true of false
-SHOW_CAVITY = false;
+SHOW_CAVITY = true;
 
 fn_all = 80;
 
+/*
+ ******************************************************************************************
+ *                                     Main                                               *
+ ******************************************************************************************
+ */
+
+// Single autoclave:
+autoclave(volume=1000, bottom=5, top=5, wall=5);
+
+// 3x3 autoclave:
+// autoclave_3x3(volume=1000, bottom=5, top=5, wall=5);
+
+// nxn autoclave:
+// autoclave_nxn(volume=1000, bottom=5, top=5, wall=5, n=5);
 
 /*
  ******************************************************************************************
@@ -117,19 +131,3 @@ module autoclave_nxn(n, volume, d, bottom, top, wall, delta=1)
 			translate([i*(D + delta), j*(D + delta), 0])
 				autoclave(volume=vol, d=dia, bottom=bottom, top=top, wall=wall);
 }
-
-
-/*
- ******************************************************************************************
- *                                     Main                                               *
- ******************************************************************************************
- */
-
-// Single autoclave:
-autoclave(volume=1000, bottom=5, top=5, wall=5);
-
-// 3x3 autoclave:
-// autoclave_3x3(volume=1000, bottom=5, top=5, wall=5);
-
-// nxn autoclave:
-// autoclave_nxn(volume=1000, bottom=5, top=5, wall=5, n=5);
